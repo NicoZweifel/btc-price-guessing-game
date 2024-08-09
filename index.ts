@@ -56,7 +56,8 @@ const tg = new aws.lb.TargetGroup("tg", {
   targetType: "ip",
   protocol: "HTTP",
   healthCheck: {
-    path: "/health",
+    path: "/api/health",
+    
   },
 });
 
