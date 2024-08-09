@@ -1,0 +1,8 @@
+config:
+  aws:region: eu-central-1
+  btc-game:domain: nicozweifel.com
+  btc-game:subdomain: btc-game
+  btc-game:zone:
+    secure: AAABALEp+XRit+chU+26DfhsYnmzcb51FJz6srsUwOMXmgON6x8DBDJHEudoUvyEaSzVRLIhJg0vd9mDi7ydWQ==
+  cloudflare:apiToken:
+    secure: AAABABEgFmkCTep5gsTl9InZ1TCOSNHQLwxP/Ix/aT503pPKeiea7+2zdmwaVavmpOk4gszXLpCZSNPvc75j8MFr+xsKIwKJ
