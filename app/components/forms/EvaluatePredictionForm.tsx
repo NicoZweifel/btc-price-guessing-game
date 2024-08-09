@@ -29,16 +29,10 @@ function EvaluatePredictionForm({
   const header = !prediction ? `Up or down(${seconds})?` : "Your guess:";
 
   useEffect(() => {
-    console.log(seconds, prediction, state);
-  }, [state, seconds, prediction]);
-
-  useEffect(() => {
     const predictionResolvable =
       prediction && Date.now() / 1000 - prediction?.timestamp >= 60;
 
-    const is10s = seconds % 10 === 0;
-
-    if (prediction && ref.current && predictionResolvable && is10s)
+    if (prediction && ref.current && predictionResolvable)
       ref.current.requestSubmit();
   }, [prediction, seconds]);
 

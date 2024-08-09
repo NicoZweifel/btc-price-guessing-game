@@ -73,7 +73,6 @@ async function evaluatePrediction(
 
     movement = comparer(first, second);
 
-    console.log(candleClosed, predictionResolvable, data.length);
     if (!candleClosed || !predictionResolvable) {
       return {
         result: movement === prediction.direction,

@@ -7,7 +7,7 @@ function usePrice(): [number, Dispatch<SetStateAction<number>>] {
   useEffect(() => {
     const socket = new WebSocket("wss://ws.bitstamp.net");
     socket.onopen = () => {
-      console.log("socket listening for events.");
+      console.debug("socket listening for btc live trades.");
 
       socket.send(
         JSON.stringify({
