@@ -130,7 +130,7 @@ loadbalancer.createListener("listener-https", {
   },
 });
 
-export const url = listener.endpoint.hostname;
+const url = listener.endpoint.hostname;
 
 new cloudflare.Record("dns_record", {
   zoneId: config.requireSecret("zone"),
@@ -222,3 +222,6 @@ awsx.classic.ec2.SecurityGroupRule.ingress(
   },
   "ecs service sg ingress ",
 );
+
+export const lb_url = pulumi.interpolate`http://${url}`
+export const address = `https://${hostname}`
