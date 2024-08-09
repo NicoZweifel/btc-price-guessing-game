@@ -26,7 +26,7 @@ function CreatePredictionForm(props: Omit<ComponentProps<"form">, "action">) {
         <Button type="submit" className="mt-6 px-4 text-sm">
           Play
         </Button>
-{state?.message && <p className="text-red-600">{state.message}</p>}
+{state?.message && <p className="pt-2 text-red-600">{state.message}</p>}
       </div>
     </form>
   );
