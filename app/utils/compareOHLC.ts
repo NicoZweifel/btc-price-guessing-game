@@ -1,3 +1,5 @@
+'use server'
+
 import { DIRECTION, OHLCData } from "@/types";
 
 function compareOHLC(first: OHLCData, second: OHLCData): DIRECTION {

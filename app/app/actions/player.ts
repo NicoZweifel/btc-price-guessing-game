@@ -20,14 +20,17 @@ export async function createPlayer(formData: FormData) {
     };
 
   const client = await getRedisClient();
+  try {
+    if (await playerService.playerExists(client, player))
+      return {
+        message: "Player already exists",
+      };
 
-  if (await playerService.playerExists(client, player))
-    return {
-      message: "Player already exists",
-    };
+    await playerService.createPlayer(client, player);
+    cookies().set("player", player);
 
-  await playerService.createPlayer(client, player);
-  cookies().set("player", player);
-
-  revalidatePath("/");
+    revalidatePath("/");
+  } finally {
+    await client.disconnect();
+  }
 }

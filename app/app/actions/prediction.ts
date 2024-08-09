@@ -19,14 +19,17 @@ export async function createPrediction(formData: FormData) {
   if (!direction) return { message: "Direction is missing!" };
 
   const client = await getRedisClient();
+  try {
+    await predictionService.createPrediction(client, {
+      player,
+      timestamp: Math.trunc(Date.now() / 1000),
+      direction,
+    });
 
-  await predictionService.createPrediction(client, {
-    player,
-    timestamp: Math.trunc(Date.now() / 1000),
-    direction,
-  });
-
-  revalidatePath("/");
+    revalidatePath("/");
+  } finally {
+    await client.disconnect();
+  }
 }
 
 export async function evaluatePrediction(): Promise<
@@ -39,28 +42,32 @@ export async function evaluatePrediction(): Promise<
 
   const client = await getRedisClient();
 
-  const prediction = await predictionService.getPrediction(
-    client,
-    player.value,
-  );
-
-  if (prediction) {
-    const predicted = await predictionService.evaluatePrediction(
-      prediction,
-      ohlcClient,
-      compareOHLC,
+  try {
+    const prediction = await predictionService.getPrediction(
+      client,
+      player.value,
     );
-    if (predicted != undefined && predicted.closed) {
-      await highscoreService.updateHighscore(
-        client,
-        player.value,
-        predicted.result,
+
+    if (prediction) {
+      const predicted = await predictionService.evaluatePrediction(
+        prediction,
+        ohlcClient,
+        compareOHLC,
       );
-      revalidatePath("/");
+      if (predicted != undefined && predicted.closed) {
+        await highscoreService.updateHighscore(
+          client,
+          player.value,
+          predicted.result,
+        );
+        revalidatePath("/");
+      } else {
+        return predicted;
+      }
     } else {
-      return predicted;
+      revalidatePath("/");
     }
-  } else {
-    revalidatePath("/");
+  } finally {
+    await client.disconnect();
   }
 }

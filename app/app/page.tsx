@@ -11,14 +11,18 @@ export default async function Home() {
   if (!player) redirect("/player/create");
 
   const client = await getRedisClient();
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <PredictionView
-        predictionService={predictionService}
-        highscoreService={highscoreService}
-        player={player.value}
-        client={client}
-      />
-    </main>
-  );
+  try {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <PredictionView
+          predictionService={predictionService}
+          highscoreService={highscoreService}
+          player={player.value}
+          client={client}
+        />
+      </main>
+    );
+  } finally {
+    await client.disconnect();
+  }
 }

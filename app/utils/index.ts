@@ -1,9 +1,6 @@
-import { ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
 import compareOHLC from "./compareOHLC";
+import cn from "./cn";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+export { compareOHLC,cn};
 
-export { compareOHLC };
+
