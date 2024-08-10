@@ -21,9 +21,14 @@ function useEvaluatePredictionForm({
   const [seconds] = useCountdown();
 
   useEffect(() => {
-    const predictionResolvable = Date.now() / 1000 - prediction.timestamp >= 60;
+    // Don't submit prediction if the current minute has not concluded.
+    const predictionSubmittable=
+      (prediction.timestamp +
+        (60 - new Date(prediction.timestamp * 1000).getSeconds())) *
+        1000 <=
+      Date.now();
 
-    if (!ref.current || !predictionResolvable) return;
+    if (!ref.current || !predictionSubmittable) return;
 
     ref.current.requestSubmit();
   }, [prediction, ref, seconds]);
