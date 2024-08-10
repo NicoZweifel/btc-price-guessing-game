@@ -39,7 +39,7 @@ This Approach was chosen for the following reasons:
 
 ## Technical Decisions
 
-- The [app](/app) uses [next.js](https://nextjs.org/) combined with [tailwind](https://tailwindui.com/), as it allowed me to prototype relatively fast.
+- The [app](/app) uses [next.js](https://nextjs.org/) combined with [tailwind](https://tailwindui.com/), as it allowed for fast prototyping.
 - [TradingView](https://www.tradingview.com/widget/advanced-chart/) is used to display an interactive OHLC Chart that uses Data from the [Bitstamp api](https://www.bitstamp.net/api/).
 - The live price displayed is using Live Market Order Data and the Guesses are evaluated against OHLC Data. All Data is from [Bitstamp](https://www.bitstamp.net/api/).
 - [redis](https://redis.io/) was chosen to persist/share/sync data because it is great for real time data or data types like rankings, scores etc.
