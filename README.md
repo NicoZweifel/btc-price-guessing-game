@@ -38,10 +38,12 @@ This Approach was chosen for the following reasons:
 - **Flexibility:** It can be adapted to different timeframes by adjusting the OHLC data accordingly.
 - **Extensibility:** Additionally more precise OHLC Data from multiple sources could be considered as well as backend functionality to persist Live Market Order Data from multiple endpoints to create custom OHLC timeframes.
 
-A drawback of this method is that guesses made towards the end of the interval are statistically "easier" than guesses made at the beginning. 
-This is because the player is betting on the result of the next interval, compared to the range of the current one which, including the high and low, hasn't concluded.
-Guesses that take this into account and consider the current high and low will be more effective.
-However, this is the same for every player, provides consistent provable results and the users latency only matters if the guess does not arrive on the server before the current interval concludes.
+> [!NOTE]
+> A drawback of this method is that guesses made towards the end of the interval are statistically "easier" than guesses made at the beginning. 
+> This is because the player is betting on the result of the next interval, compared to the range of the current one which, including the high and low, hasn't concluded.
+> Players that take this into account and consider the current high and low will make more effective guesses.
+>
+> **This applies to all players, creating a fair environment and providing consistent provable results.**
 
 
 ## Technical Decisions
@@ -60,7 +62,7 @@ However, this is the same for every player, provides consistent provable results
 
 - More Data sources.
 - Persisting/Aggregating Live Order Data.
-- Custom OHLC Data with smaller timeframes.
+- Custom OHLC Data with smaller timeframes (sub 1 min - limiting/eliminating the drawback of this solution).
 - Weighted Averages to account for price distribution within the interval.
 - Volatility Adjustment.
 - Authentication and real accounts, as well as a relational Database.
