@@ -47,14 +47,12 @@ export default async function Home() {
             <CreatePredictionForm />
           )}
           <div className="pt-2">
-            <p className="text-neutral-200">Highscore</p>
-            <p className="text-2xl text-neutral-200 text-center">
-              {highscore ?? 0}
-            </p>
+            <p className="text-lg font-semibold">Highscore</p>
+            <p className="text-2xl text-center">{highscore ?? 0}</p>
           </div>
         </div>
         <div>
-          <p className="text-neutral-200">Leaderboard</p>
+          <p className="text-lg font-semibold">Leaderboard</p>
           {leaderBoard.map((x) => (
             <p key={x}>{x}</p>
           ))}

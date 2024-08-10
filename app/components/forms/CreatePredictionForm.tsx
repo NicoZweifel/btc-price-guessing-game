@@ -18,7 +18,7 @@ function CreatePredictionForm({
       className={cn("flex flex-col gap-2", className)}
       action={createPrediction}
     >
-      <p className={"text-lg text-center"}>Up or down?</p>
+      <p className={"text-lg font-semibold text-center"}>Up or down?</p>
       <p suppressHydrationWarning className={"font-bold text-center"}>
         {seconds}s remaining to submit a guess.
       </p>
