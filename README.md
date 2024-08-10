@@ -45,7 +45,7 @@ This Approach was chosen for the following reasons:
 - [redis](https://redis.io/) was chosen to persist/share/sync data because it is great for real time data or data types like rankings, scores etc.
 - [Pulumi](https://www.pulumi.com/docs/) is used to deploy to AWS. This project is using Fargate as there is no need to automatically scale. 
 - [Cloudflare](https://www.cloudflare.com/) is used to manage the DNS record and SSL certificate.
-- [Jest](https://jestjs.io/) Was chosen to run tests. 
+- [Jest](https://jestjs.io/) was chosen to run tests. 
 - A Service layer is used, so that Application Logic can be easily tested against different test cases.
 
 ### Potential improvements
@@ -69,14 +69,36 @@ The deployment script is written with [Pulumi](https://www.pulumi.com/docs/) and
 > [!IMPORTANT]
 > [Pulumi](https://www.pulumi.com/docs/), [Cloudflare](https://www.cloudflare.com/) and [AWS](https://aws.amazon.com/) Accounts are required to Preview or Update Cloud Resources.
 
+
+#### Install dependencies
+```
+pnpm i
+```
+
 Make sure that you create your own stack with configuration like domain, subdomain and secrets that represent your cloudflare api token and zone ID respectively if you intend to use this script.
+
+> [!TIP]  
+> If you do not want to use Pulumi you can also use the Dockerfile or [Docker-compose](https://docs.docker.com/compose/). [Below](#Docker) is more information.
+
+### Create a Stack
+
+
+```bash
+pulumi stack init
+```
+
+Check the [config section](https://www.pulumi.com/docs/concepts/config/) and add your configuration, as well as secrets. 
+
+### Preview & Deploy
+
+```bash
+pulumi up
+```
 
 ## Docker
 
 A `Dockerfile` is included [here](/app/Dockerfile).
 
-> [!TIP]  
-> If you do not want to use Pulumi you can also use [Docker-compose](https://docs.docker.com/compose/)
 
 ```bash
 docker-compose up
