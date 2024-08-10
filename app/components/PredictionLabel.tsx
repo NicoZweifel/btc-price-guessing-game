@@ -18,18 +18,21 @@ function PredictionLabel({
     <div
       {...props}
       className={cn(
-        "py-3 px-10 flex-col rounded-lg text-black font-semibold items-center justify-center flex gap-2",
-        prediction.direction == DIRECTION.UP ? "bg-green-700" : "bg-red-700",
+        "py-3 px-10 flex-col rounded-lg text-black font-semibold ring-1 items-center justify-center flex gap-2",
+        prediction.direction == DIRECTION.UP ? "bg-green-700 ring-green-900" : "bg-red-700 ring-green-900",
         className,
       )}
     >
-      <p {...props} suppressHydrationWarning>
+      <div className="flex flex-row gap-2 font-semibold text-lg">
+        {prediction.direction == DIRECTION.UP ? <ArrowUp /> : <ArrowDown />}
+        {new Date((prediction.timestamp + 120) *1000).toLocaleDateString("DE-de",{
+          hour: "2-digit",
+          minute: "2-digit",
+        })}
+      </div>
+      <p className="font-bold" >
         {text}
       </p>
-      <div className="flex flex-row gap-2">
-        {prediction.direction == DIRECTION.UP ? <ArrowUp /> : <ArrowDown />}
-        {new Date(prediction.timestamp * 1000).toString()}
-      </div>
     </div>
   );
 }
