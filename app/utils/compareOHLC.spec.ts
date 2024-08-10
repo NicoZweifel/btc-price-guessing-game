@@ -32,12 +32,12 @@ describe("compareOHLC", () => {
   });
 
   it("should return DIRECTION.UNCHANGED when second close is higher, high is higher but low is lower than previous low", () => {
-    const second: OHLCData = { ...first, close: 115, high: 130, low: 70 };
+    const second: OHLCData = { ...first, close: 130, high: 140, low: 70 };
     expect(compareOHLC(first, second)).toBe(DIRECTION.UNCHANGED);
   });
 
   it("should return DIRECTION.UNCHANGED when second close is lower, low is lower but high is higher than previous high", () => {
-    const second: OHLCData = { ...first, close: 105, low: 70, high: 130 };
+    const second: OHLCData = { ...first, close: 70, low: 60, high: 140 };
     expect(compareOHLC(first, second)).toBe(DIRECTION.UNCHANGED);
   });
 
