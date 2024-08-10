@@ -56,7 +56,7 @@ This Approach was chosen for the following reasons:
 - Weighted Averages to account for price distribution within the interval.
 - Volatility Adjustment.
 - Authentication and real accounts, as well as a relational Database.
-- Could be hosted on Lambda by using [OpenNEXT](https://open-next.js.org/) or ECS with ec2 Instances could be used instead of Fargate.
+- Could be hosted on Lambda by using [OpenNEXT](https://open-next.js.org/)(pulumi or terraform) or ECS with ec2 Instances could be used instead of Fargate.
 
 ### Development
 
