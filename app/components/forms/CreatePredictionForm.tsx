@@ -6,6 +6,8 @@ import { DIRECTION } from "@/types";
 function CreatePredictionForm(props: Omit<ComponentProps<"form">, "action">) {
   return (
     <form {...props} action={createPrediction}>
+      <p className={"text-lg text-center pb-2"}>Up or down?</p>
+
       <div className="flex flex-row gap-2">
         <Button
           type="submit"

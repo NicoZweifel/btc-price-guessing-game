@@ -1,4 +1,4 @@
-import  CreatePlayerForm  from "./CreatePlayerForm";
+import CreatePlayerForm from "./CreatePlayerForm";
 import CreatePredictionForm from "./CreatePredictionForm";
 import EvaluatePredictionForm, {
   EvaluatePredictionFormProps,

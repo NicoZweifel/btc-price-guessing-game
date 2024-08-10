@@ -58,7 +58,7 @@ export async function evaluatePrediction(): Promise<
         await highscoreService.updateHighscore(
           client,
           player.value,
-          predicted.result,
+          predicted.value,
         );
         revalidatePath("/");
       } else {

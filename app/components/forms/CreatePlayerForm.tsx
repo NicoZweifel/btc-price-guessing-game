@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { createPlayer } from "@/app/actions/player";
 import Button from "@/components/Button";
@@ -8,7 +8,7 @@ import { useFormState } from "react-dom";
 function CreatePredictionForm(props: Omit<ComponentProps<"form">, "action">) {
   const [state, formAction] = useFormState(createPlayer, undefined);
   return (
-    <form {...props} action={formAction} >
+    <form {...props} action={formAction}>
       <label
         htmlFor="player"
         className="text-xl font-bold tracking-tight text-gray-900 dark:text-white"
@@ -26,10 +26,10 @@ function CreatePredictionForm(props: Omit<ComponentProps<"form">, "action">) {
         <Button type="submit" className="mt-6 px-4 text-sm">
           Play
         </Button>
-{state?.message && <p className="pt-2 text-red-600">{state.message}</p>}
+        {state?.message && <p className="pt-2 text-red-600">{state.message}</p>}
       </div>
     </form>
   );
 }
 
-export default CreatePredictionForm
+export default CreatePredictionForm;

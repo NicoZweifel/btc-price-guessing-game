@@ -4,7 +4,6 @@ import {
   Chart,
   CreatePredictionForm,
   EvaluatePredictionForm,
-  PredictionLabel,
   Price,
 } from "@/components";
 import { highscoreService, predictionService } from "@/services";
@@ -39,15 +38,14 @@ export default async function Home() {
         <div className="flex grow flex-col gap-2 max-w-5xl items-center justify-between font-mono text-sm">
           <Chart className="flex flex-col grow" />
           <Price className="pt-2" />
-          <EvaluatePredictionForm prediction={prediction} />
           {prediction ? (
-            <PredictionLabel prediction={prediction} />
+            <EvaluatePredictionForm prediction={prediction} />
           ) : (
             <CreatePredictionForm />
           )}
           {highscore && (
-            <div>
-              <p className="text-neutral-200 pt-4">Highscore</p>
+            <div className="pt-2">
+              <p className="text-neutral-200">Highscore</p>
               <p className="text-2xl text-neutral-200 text-center">
                 {highscore}
               </p>

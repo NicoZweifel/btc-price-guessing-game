@@ -68,7 +68,7 @@ describe("evaluatePrediction", () => {
       mockCompareOHLC,
     );
 
-    expect(result).toStrictEqual({ closed: true, result: true });
+    expect(result).toStrictEqual({ closed: true, value: true });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(1);
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
   });
@@ -85,7 +85,7 @@ describe("evaluatePrediction", () => {
       mockCompareOHLC,
     );
 
-    expect(result).toStrictEqual({ closed: true, result: false });
+    expect(result).toStrictEqual({ closed: true, value: false });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(1);
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
   });
@@ -102,7 +102,7 @@ describe("evaluatePrediction", () => {
 
     expect(result).toStrictEqual({
       closed: false,
-      result: true,
+      value: true,
     });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(1);
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
@@ -142,7 +142,7 @@ describe("evaluatePrediction", () => {
 
     expect(result).toStrictEqual({
       closed: true,
-      result: true,
+      value: true,
     });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(2);
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
@@ -163,7 +163,7 @@ describe("evaluatePrediction", () => {
 
     expect(result).toStrictEqual({
       closed: false,
-      result: true,
+      value: true,
     });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(1);
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
@@ -187,7 +187,7 @@ describe("evaluatePrediction", () => {
 
     expect(result).toStrictEqual({
       closed: false,
-      result: true,
+      value: true,
     });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(1);
     expect(mockCompareOHLC).toHaveBeenCalledWith(...mockDataWithOldCandle);

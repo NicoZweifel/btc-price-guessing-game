@@ -57,7 +57,6 @@ const tg = new aws.lb.TargetGroup("tg", {
   protocol: "HTTP",
   healthCheck: {
     path: "/api/health",
-    
   },
 });
 
@@ -223,5 +222,5 @@ awsx.classic.ec2.SecurityGroupRule.ingress(
   "ecs service sg ingress ",
 );
 
-export const lb_url = pulumi.interpolate`http://${url}`
-export const address = `https://${hostname}`
+export const lb_url = pulumi.interpolate`http://${url}`;
+export const address = `https://${hostname}`;

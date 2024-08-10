@@ -6,11 +6,11 @@ export type Prediction = {
 
 export type EvaluatePredictionResult =
   | {
-      result?: boolean;
+      value?: boolean;
       closed: false;
     }
   | {
-      result: boolean;
+      value: boolean;
       closed: true;
     };
 
