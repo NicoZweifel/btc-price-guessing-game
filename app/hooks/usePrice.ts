@@ -1,29 +1,15 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import useSocket from "./useSocket";
 
 function usePrice(): [number, Dispatch<SetStateAction<number>>] {
   const [price, setPrice] = useState(0);
   const prev = useRef(0);
 
-  const [socket, setSocket] = useState<WebSocket>();
-
-  const init = useCallback(
-    () => setSocket(new WebSocket("wss://ws.bitstamp.net")),
-    [],
-  );
-
-  useEffect(() => {
-    init();
-  }, [init]);
+  const [socket, reconnect] = useSocket("wss://ws.bitstamp.net");
 
   useEffect(() => {
     if (!socket) return;
+
     socket.onopen = () => {
       console.debug("socket listening for btc live trades.");
 
@@ -47,10 +33,9 @@ function usePrice(): [number, Dispatch<SetStateAction<number>>] {
 
     socket.onclose = () => {
       console.debug("socket closed.");
-      init();
+      reconnect();
     };
-    return () => socket.close();
-  }, [init, socket]);
+  }, [reconnect, socket]);
 
   return [price, setPrice];
 }
