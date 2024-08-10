@@ -1,8 +1,11 @@
+"use client";
+
 import { Prediction, DIRECTION, EvaluatePredictionResult } from "@/types";
 import { ComponentProps } from "react";
 import { cn } from "@/utils";
 import ArrowUp from "./ArrowUp";
 import ArrowDown from "./ArrowDown";
+import { useCountdown } from "@/hooks";
 
 function PredictionLabel({
   prediction,
@@ -13,6 +16,8 @@ function PredictionLabel({
   prediction: Prediction;
   result?: EvaluatePredictionResult;
 } & ComponentProps<"div">) {
+  const [seconds] = useCountdown();
+
   const text = `Your guess currently resolves to: ${result?.value?.toString() ?? "unchanged."}`;
 
   let end = new Date((prediction.timestamp + 120) * 1000);
@@ -43,7 +48,11 @@ function PredictionLabel({
           " - " +
           end.toLocaleTimeString()}
       </div>
-      <p className="font-bold">{text}</p>
+      {result && (
+        <p className="font-bold">
+          {text}. {seconds} seconds remaining.
+        </p>
+      )}
     </div>
   );
 }
