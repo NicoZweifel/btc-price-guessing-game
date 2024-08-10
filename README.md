@@ -25,7 +25,7 @@ A BTC price guessing game.
 Guesses are UTC timestamps that get created on the server and are resolved against OHLC Data.
 
 > [!IMPORTANT]
-> **A guess is considered correct if the close of the following minute closed as predicted while also taking into account previous price range, i.e. a close lower than the previous one with lower lows but higher highs is considered unchanged. In this case the next interval will be compared.**
+> **A guess is considered correct if the close of the following minute closed as predicted while also considering the price ranges, i.e. a close lower than the previous one with lower lows but higher highs is considered unchanged. In this case the next interval will be compared.**
 >
 > **A guess during high volatility could take some time to be resolved. The following intervals could be considered "unchanged" until a new high, low and close is established.**
 
