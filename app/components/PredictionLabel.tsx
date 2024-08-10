@@ -21,6 +21,7 @@ function PredictionLabel({
   const text = `Your guess currently resolves to: ${result?.value ? result.value.toString() : "unchanged"}`;
 
   let end = new Date((prediction.timestamp + 120) * 1000);
+  console.log(result);
   // Price is considered unchanged. We will have to wait another minute.
   if (result && result.value === undefined) {
     end.setMinutes(end.getMinutes() + 1);
@@ -40,7 +41,10 @@ function PredictionLabel({
         className,
       )}
     >
-      <div suppressHydrationWarning className="flex flex-row gap-2 font-semibold text-lg">
+      <div
+        suppressHydrationWarning
+        className="flex flex-row gap-2 font-semibold text-lg"
+      >
         {prediction.direction == DIRECTION.UP ? <ArrowUp /> : <ArrowDown />}
         {new Date(prediction.timestamp * 1000).toLocaleTimeString() +
           " - " +
