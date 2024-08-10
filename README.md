@@ -62,7 +62,7 @@ This Approach was chosen for the following reasons:
 
 - More Data sources.
 - Persisting/Aggregating Live Order Data.
-- Custom OHLC Data with smaller timeframes (limiting/eliminating the drawback of this solution).
+- Custom OHLC Data with smaller timeframes (sub 1 min - limiting/eliminating the drawback of this solution).
 - Weighted Averages to account for price distribution within the interval.
 - Volatility Adjustment.
 - Authentication and real accounts, as well as a relational Database.
