@@ -19,6 +19,7 @@ function Chart({ className, ...props }: Omit<ComponentProps<"div">, "ref">) {
           "interval": "1",
           "timezone": "Etc/UTC",
           "theme": "dark",
+          "timezone": "Europe/Berlin",
           "style": "1",
           "locale": "en",
           "allow_symbol_change": true,

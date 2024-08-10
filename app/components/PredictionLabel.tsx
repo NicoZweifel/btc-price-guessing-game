@@ -23,9 +23,12 @@ function PredictionLabel({
   const text = `Your guess currently resolves to: ${result?.value ? result.value.toString() : `unchanged`}`;
 
   let end = new Date((prediction.timestamp + 120) * 1000);
-
-  // Remove seconds to get time when prediction can be solved.
   end.setSeconds(0);
+
+  if (new Date() > end) {
+    end = new Date(Date.now() + 60 * 1000);
+    end.setSeconds(0);
+  }
 
   return (
     <div
