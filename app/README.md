@@ -16,8 +16,15 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Tests
 
+```bash
+pnpm test
+```
 
+## Lint
 
+```bash
+pnpm lint
+```
 
 ## Next.js 
 
