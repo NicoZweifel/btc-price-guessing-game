@@ -24,7 +24,7 @@ export default async function Home() {
     res = await Promise.all([
       predictionService.getPrediction(client, player.value),
       highscoreService.getHighscore(client, player.value),
-      highscoreService.getRange(client, 0, 10),
+      highscoreService.getRange(client, 0, 50),
       orderClient.get(),
     ]);
   } finally {
@@ -47,13 +47,16 @@ export default async function Home() {
             <CreatePredictionForm />
           )}
           <div className="pt-2">
-            <p className="text-lg font-semibold">{player.value}{"'"}s highscore</p>
+            <p className="text-lg font-semibold">
+              {player.value}
+              {"'"}s highscore
+            </p>
             <p className="text-2xl text-center">{highscore ?? 0}</p>
           </div>
         </div>
         <div>
           <p className="text-lg font-semibold">Leaderboard</p>
-          {leaderBoard.map((x) => (
+          {leaderBoard.reverse().map((x) => (
             <p key={x}>{x}</p>
           ))}
         </div>
