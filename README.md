@@ -26,16 +26,16 @@ A BTC price guessing game.
 Guesses are UTC timestamps that get created on the server and are resolved against OHLC Data.
 
 > [!IMPORTANT]
-> A guess is considered correct if the close of the following minute closed as predicted while also having a price range that isn't larger. I.e. if the following interval has a lower low and a higher high, it is considered unchanged and the next interval will be compared.
+> **A guess is considered correct if the close of the following minute closed as predicted while also having a price range that isn't larger. I.e. if the following interval has a lower low and a higher high, it is considered unchanged and the next interval will be compared.**
 
 This Approach was chosen for the following reasons:
 
-- Fairness: It provides a clear and objective method for determining whether the price has moved up or down within a specific interval.
-- Accuracy: Using OHLC data, especially high and low values, gives a reliable representation of the price range during that period.
-- Consistency: The approach ensures consistent evaluation of guesses, reducing potential biases or ambiguities.
-- Reduced Latency: By relying on pre-calculated OHLC data, the system can process guesses more efficiently.
-- Flexibility: It can be adapted to different timeframes by adjusting the OHLC data accordingly.
-- Extensibility: Additionally more precise OHLC Data from multiple sources could be considered as well as backend functionality to persist Live Market Order Data from multiple endpoints to create custom OHLC timeframes.
+- **Fairness:** It provides a clear and objective method for determining whether the price has moved up or down within a specific interval.
+- **Accuracy:** Using OHLC data, especially high and low values, gives a reliable representation of the price range during that period.
+- **Consistency:** The approach ensures consistent evaluation of guesses, reducing potential biases or ambiguities.
+- **Reduced Latency:** By relying on pre-calculated OHLC data, the system can process guesses more efficiently.
+- **Flexibility:** It can be adapted to different timeframes by adjusting the OHLC data accordingly.
+- **Extensibility:** Additionally more precise OHLC Data from multiple sources could be considered as well as backend functionality to persist Live Market Order Data from multiple endpoints to create custom OHLC timeframes.
 
 ## Technical Decisions
 
@@ -56,17 +56,24 @@ This Approach was chosen for the following reasons:
 - Weighted Averages to account for price distribution within the interval.
 - Volatility Adjustment.
 - Authentication and real accounts, as well as a relational Database.
+- Could be hosted on Lambda by using [OpenNEXT](https://open-next.js.org/) or ECS with ec2 Instances could be used instead of Fargate.
 
 ### Development
 
 For Development instructions of the application please go [here](/app/README.md)
 
+### Deployment
+
 The deployment script is written with [Pulumi](https://www.pulumi.com/docs/) and creates all required cloud resources on AWS, as well as getting a Certificate and creating a DNS Entry on Cloudflare.
 
 > [!IMPORTANT]
-> You will need a [Pulumi](https://www.pulumi.com/docs/),[Cloudflare](https://www.cloudflare.com/) and [AWS](https://aws.amazon.com/) Account to Preview or Update Cloud Resources.
+> [Pulumi](https://www.pulumi.com/docs/), [Cloudflare](https://www.cloudflare.com/) and [AWS](https://aws.amazon.com/) Accounts are required to Preview or Update Cloud Resources.
 
-Make sure that you create your own stack with configuration like domain, subdomain and secrets that represent your cloudflare api token and zone ID respectively.
+Make sure that you create your own stack with configuration like domain, subdomain and secrets that represent your cloudflare api token and zone ID respectively if you intend to use this script.
+
+## Docker
+
+A `Dockerfile` is included [here](/app/Dockerfile).
 
 > [!TIP]  
 > If you do not want to use Pulumi you can also use [Docker-compose](https://docs.docker.com/compose/)
