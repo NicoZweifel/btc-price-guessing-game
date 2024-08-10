@@ -47,7 +47,7 @@ export default async function Home() {
             <CreatePredictionForm />
           )}
           <div className="pt-2">
-            <p className="text-lg font-semibold">Highscore</p>
+            <p className="text-lg font-semibold">{player.value}{"'"}s highscore</p>
             <p className="text-2xl text-center">{highscore ?? 0}</p>
           </div>
         </div>
