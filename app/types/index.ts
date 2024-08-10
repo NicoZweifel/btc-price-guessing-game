@@ -29,4 +29,8 @@ export type OHLCData = {
   volume: number;
 };
 
+export type OrderData = {
+  price: number;
+};
+
 export type OHLCComparer = (first: OHLCData, second: OHLCData) => DIRECTION;

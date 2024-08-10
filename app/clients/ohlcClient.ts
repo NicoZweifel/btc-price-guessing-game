@@ -1,10 +1,10 @@
 import { OHLCData } from "@/types";
 
 export interface OHLCClient {
-  getData(timestamp: number): Promise<OHLCData[]>;
+  get(timestamp: number): Promise<OHLCData[]>;
 }
 
-async function getData(timestamp: number) {
+async function get(timestamp: number) {
   let data = await fetch(
     `https://www.bitstamp.net/api/v2/ohlc/btcusd/?limit=60&step=60&start=${timestamp}`,
   ).then((x) => x.json());
@@ -12,6 +12,6 @@ async function getData(timestamp: number) {
   return data;
 }
 
-const ohlcClient: OHLCClient = { getData };
+const ohlcClient: OHLCClient = { get };
 
 export default ohlcClient;

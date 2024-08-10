@@ -54,7 +54,7 @@ async function evaluatePrediction(
   ohlcClient: OHLCClient,
   comparer: (firstCandle: OHLCData, secondCandle: OHLCData) => DIRECTION,
 ): Promise<EvaluatePredictionResult | undefined> {
-  const data = await ohlcClient.getData(prediction.timestamp);
+  const data = await ohlcClient.get(prediction.timestamp);
 
   if (data.length < 2) {
     return undefined; // Insufficient data

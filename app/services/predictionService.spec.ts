@@ -19,7 +19,7 @@ describe("evaluatePrediction", () => {
   let prediction: Prediction;
 
   beforeEach(() => {
-    mockOhclClient = { getData: jest.fn() } as jest.Mocked<OHLCClient>;
+    mockOhclClient = { get: jest.fn() } as jest.Mocked<OHLCClient>;
     mockCompareOHLC = jest.fn();
     prediction = {
       player: "testPlayer",
@@ -29,7 +29,7 @@ describe("evaluatePrediction", () => {
   });
 
   it("should return undefined for < 2 candles", async () => {
-    mockOhclClient.getData.mockResolvedValue([]);
+    mockOhclClient.get.mockResolvedValue([]);
 
     const result = await predictionService.evaluatePrediction(
       prediction,
@@ -42,7 +42,7 @@ describe("evaluatePrediction", () => {
   });
 
   it("should return true for correct UP prediction", async () => {
-    mockOhclClient.getData.mockResolvedValue(mockData);
+    mockOhclClient.get.mockResolvedValue(mockData);
     mockCompareOHLC.mockReturnValue(DIRECTION.UP);
 
     const result = await predictionService.evaluatePrediction(
@@ -59,7 +59,7 @@ describe("evaluatePrediction", () => {
   it("should return true for correct DOWN prediction", async () => {
     prediction.direction = DIRECTION.DOWN;
 
-    mockOhclClient.getData.mockResolvedValue(mockData);
+    mockOhclClient.get.mockResolvedValue(mockData);
     mockCompareOHLC.mockReturnValue(DIRECTION.DOWN);
 
     const result = await predictionService.evaluatePrediction(
@@ -76,7 +76,7 @@ describe("evaluatePrediction", () => {
   it("should return false for incorrect prediction", async () => {
     prediction.direction = DIRECTION.DOWN;
 
-    mockOhclClient.getData.mockResolvedValue(mockData);
+    mockOhclClient.get.mockResolvedValue(mockData);
     mockCompareOHLC.mockReturnValue(DIRECTION.UP);
 
     const result = await predictionService.evaluatePrediction(
@@ -91,7 +91,7 @@ describe("evaluatePrediction", () => {
   });
 
   it("should return unclosed result if < 3 candles", async () => {
-    mockOhclClient.getData.mockResolvedValue([mockData[0], mockData[1]]);
+    mockOhclClient.get.mockResolvedValue([mockData[0], mockData[1]]);
     mockCompareOHLC.mockReturnValue(DIRECTION.UP);
 
     const result = await predictionService.evaluatePrediction(
@@ -109,7 +109,7 @@ describe("evaluatePrediction", () => {
   });
 
   it("should return undefined unclosed result if last candle is UNCHANGED", async () => {
-    mockOhclClient.getData.mockResolvedValue(mockData);
+    mockOhclClient.get.mockResolvedValue(mockData);
 
     mockCompareOHLC.mockReturnValueOnce(DIRECTION.UNCHANGED);
     mockCompareOHLC.mockReturnValueOnce(DIRECTION.UNCHANGED);
@@ -129,7 +129,7 @@ describe("evaluatePrediction", () => {
   });
 
   it("should return third candle result if second candle is UNCHANGED", async () => {
-    mockOhclClient.getData.mockResolvedValue(mockData);
+    mockOhclClient.get.mockResolvedValue(mockData);
 
     mockCompareOHLC.mockReturnValueOnce(DIRECTION.UNCHANGED);
     mockCompareOHLC.mockReturnValueOnce(DIRECTION.UP);
@@ -150,7 +150,7 @@ describe("evaluatePrediction", () => {
   });
 
   it("should return unclosed result if prediction is younger than 60 seconds", async () => {
-    mockOhclClient.getData.mockResolvedValue(mockData);
+    mockOhclClient.get.mockResolvedValue(mockData);
     prediction.timestamp = Math.trunc(Date.now() / 1000) - 30;
 
     mockCompareOHLC.mockReturnValueOnce(DIRECTION.UP);
@@ -176,7 +176,7 @@ describe("evaluatePrediction", () => {
       { ...mockData[1], timestamp }, // younger than 60 seconds
     ];
 
-    mockOhclClient.getData.mockResolvedValue(mockDataWithOldCandle);
+    mockOhclClient.get.mockResolvedValue(mockDataWithOldCandle);
     mockCompareOHLC.mockReturnValueOnce(DIRECTION.UP);
 
     const result = await predictionService.evaluatePrediction(

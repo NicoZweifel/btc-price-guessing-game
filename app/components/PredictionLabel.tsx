@@ -7,15 +7,17 @@ import ArrowUp from "./ArrowUp";
 import ArrowDown from "./ArrowDown";
 import { useCountdown } from "@/hooks";
 
+export type PredictionLabelProps = {
+  prediction: Prediction;
+  result?: EvaluatePredictionResult;
+} & ComponentProps<"div">;
+
 function PredictionLabel({
   prediction,
   className,
   result,
   ...props
-}: {
-  prediction: Prediction;
-  result?: EvaluatePredictionResult;
-} & ComponentProps<"div">) {
+}: PredictionLabelProps) {
   const [seconds] = useCountdown();
 
   const text = `Your guess currently resolves to: ${result?.value ? result.value.toString() : `unchanged`}`;
