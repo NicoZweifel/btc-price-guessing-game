@@ -38,7 +38,9 @@ This Approach was chosen for the following reasons:
 - **Extensibility:** Additionally more precise OHLC Data from multiple sources could be considered as well as backend functionality to persist Live Market Order Data from multiple endpoints to create custom OHLC timeframes.
 
 A drawback of this method is that guesses made towards the end of the interval are statistically "easier" than guesses made at the beginning. 
-This is because the player is betting on the result of the next interval, compared to the curent one which, including the high and low, hasn't concluded. 
+This is because the player is betting on the result of the next interval, compared to the curent one which, including the high and low, hasn't concluded.
+Guesses that take this into account and consider the current high and low will be more effective.
+
 However, this is the same for every player, provides consistent provable results and the users latency only matters if the guess does not arrive on the server before the current interval concludes.
 
 
