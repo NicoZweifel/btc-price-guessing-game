@@ -15,7 +15,7 @@ function Price({ className, initialPrice, ...props }: PriceProps) {
       {...props}
       className={cn("text-gray-200 font-semibold text-lg", className)}
     >
-      1₿ = {price > 0 ? `${price}$` : initialPrice > 0 ? initialPrice : "N/A"}
+      1₿ = {price > 0 ? `${price}$` : initialPrice > 0 ? `${initialPrice}$` : "N/A"}
     </p>
   );
 }
