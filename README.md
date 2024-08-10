@@ -76,7 +76,7 @@ For Development instructions of the application please go [here](/app/README.md)
 
 #### Format
 
-Formatting can be done with [`prettier`].
+Formatting can be done with [`prettier`](https://prettier.io/).
 
 ```bash
 pnpm format
