@@ -76,7 +76,7 @@ async function evaluatePrediction(
     if (!candleClosed || !predictionResolvable) {
       return {
         value: movement === prediction.direction,
-        closed: false,
+        resolved: false,
       };
     }
 
@@ -84,10 +84,10 @@ async function evaluatePrediction(
   }
 
   if (movement == DIRECTION.UNCHANGED) {
-    return { closed: false };
+    return { resolved: false };
   }
 
-  return { closed: true, value: movement === prediction.direction };
+  return { resolved: true, value: movement === prediction.direction };
 }
 
 const service: PredictionService = {

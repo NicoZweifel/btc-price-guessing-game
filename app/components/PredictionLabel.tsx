@@ -18,14 +18,9 @@ function PredictionLabel({
 } & ComponentProps<"div">) {
   const [seconds] = useCountdown();
 
-  const text = `Your guess currently resolves to: ${result?.value ? result.value.toString() : "unchanged"}`;
+  const text = `Your guess currently resolves to: ${result?.value ? result.value.toString() : `unchanged`}`;
 
   let end = new Date((prediction.timestamp + 120) * 1000);
-  console.log(result);
-  // Price is considered unchanged. We will have to wait another minute.
-  if (result && result.value === undefined) {
-    end.setMinutes(end.getMinutes() + 1);
-  }
 
   // Remove seconds to get time when prediction can be solved.
   end.setSeconds(0);

@@ -7,11 +7,11 @@ export type Prediction = {
 export type EvaluatePredictionResult =
   | {
       value?: boolean;
-      closed: false;
+      resolved: false;
     }
   | {
       value: boolean;
-      closed: true;
+      resolved: true;
     };
 
 export enum DIRECTION {
