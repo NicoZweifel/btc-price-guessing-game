@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import useSocket from "./useSocket";
+import { OrderData } from "@/types";
 
 function usePrice(): [number, Dispatch<SetStateAction<number>>] {
   const [price, setPrice] = useState(0);
@@ -23,12 +24,12 @@ function usePrice(): [number, Dispatch<SetStateAction<number>>] {
       );
     };
     socket.onmessage = (x) => {
-      const data = JSON.parse(x.data);
+      const res: { data?: Partial<OrderData> } = JSON.parse(x.data);
 
-      if (!data.data.price) return;
+      if (!res.data?.price) return;
 
-      setPrice(data.data.price);
-      prev.current = data.data.price;
+      setPrice(res.data?.price);
+      prev.current = res.data?.price;
     };
 
     socket.onclose = () => {
