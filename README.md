@@ -74,7 +74,7 @@ For Development instructions of the application please go [here](/app/README.md)
 
 ### Deployment
 
-The deployment script is written with [Pulumi](https://www.pulumi.com/docs/) and creates all required cloud resources on AWS, as well as getting a Certificate and creating a DNS Entry on Cloudflare.
+The deployment script is using [Pulumi](https://www.pulumi.com/docs/) and creates all required cloud resources on AWS, as well as getting a Certificate and creating a DNS Entry on Cloudflare.
 
 > [!IMPORTANT]
 > [Pulumi](https://www.pulumi.com/docs/), [Cloudflare](https://www.cloudflare.com/) and [AWS](https://aws.amazon.com/) Accounts are required to Preview or Update Cloud Resources.
