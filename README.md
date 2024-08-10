@@ -26,7 +26,7 @@ A BTC price guessing game.
 Guesses are UTC timestamps that get created on the server and are resolved against OHLC Data.
 
 > [!IMPORTANT]
-> **A guess is considered correct if the close of the following minute closed as predicted while also having a price range that isn't larger. I.e. if the following interval has a lower low and a higher high, it is considered unchanged and the next interval will be compared.**
+> **A guess is considered correct if the close of the following minute closed as predicted while also taking into account the price range, i.e. if the following interval has a lower low and a higher high, it is considered unchanged and the next interval will be compared.**
 
 This Approach was chosen for the following reasons:
 
@@ -37,11 +37,19 @@ This Approach was chosen for the following reasons:
 - **Flexibility:** It can be adapted to different timeframes by adjusting the OHLC data accordingly.
 - **Extensibility:** Additionally more precise OHLC Data from multiple sources could be considered as well as backend functionality to persist Live Market Order Data from multiple endpoints to create custom OHLC timeframes.
 
+A drawback of this method is that guesses made towards the end of the interval are statistically "easier" than guesses made at the beginning. 
+This is because the player is betting on the result of the next interval, compared to the curent one which, including the high and low, hasn't concluded.
+Guesses that take this into account and consider the current high and low will be more effective.
+
+However, this is the same for every player, provides consistent provable results and the users latency only matters if the guess does not arrive on the server before the current interval concludes.
+
+
 ## Technical Decisions
 
 - The [app](/app) uses [next.js](https://nextjs.org/) combined with [tailwind](https://tailwindui.com/), as it allowed for fast prototyping.
 - [TradingView](https://www.tradingview.com/widget/advanced-chart/) is used to display an interactive OHLC Chart that uses Data from the [Bitstamp api](https://www.bitstamp.net/api/).
-- The live price displayed is using Live Market Order Data and the Guesses are evaluated against OHLC Data. All Data is from [Bitstamp](https://www.bitstamp.net/api/).
+- The live price displayed is using Live Market Order Data that is received over a websocket connection
+- Guesses are evaluated against OHLC Data. All Data is from [Bitstamp](https://www.bitstamp.net/api/).
 - [redis](https://redis.io/) was chosen to persist/share/sync data because it is great for real time data or data types like rankings, scores etc.
 - [Pulumi](https://www.pulumi.com/docs/) is used to deploy to AWS. This project is using Fargate as there is no need to automatically scale. 
 - [Cloudflare](https://www.cloudflare.com/) is used to manage the DNS record and SSL certificate.
