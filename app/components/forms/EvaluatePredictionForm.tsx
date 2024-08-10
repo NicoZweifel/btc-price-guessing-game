@@ -22,7 +22,7 @@ function useEvaluatePredictionForm({
 
   useEffect(() => {
     // Don't submit prediction if the current minute has not concluded.
-    const predictionSubmittable=
+    const predictionSubmittable =
       (prediction.timestamp +
         (60 - new Date(prediction.timestamp * 1000).getSeconds())) *
         1000 <=
