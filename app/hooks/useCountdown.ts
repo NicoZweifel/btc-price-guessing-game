@@ -3,7 +3,9 @@ import useInterval from "./useInterval";
 
 const getCountdown = (interval: number) => interval - new Date().getSeconds();
 
-function useCountdown(interval:number = 60): [number, Dispatch<SetStateAction<number>>] {
+function useCountdown(
+  interval: number = 60,
+): [number, Dispatch<SetStateAction<number>>] {
   const [seconds, setSeconds] = useState<number>(getCountdown(interval));
 
   useInterval(() => {

@@ -4,9 +4,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: 'BTC-game | player creation',
-  description: 'Player creation of BTC price guessing game.',
-}
+  title: "BTC-game | player creation",
+  description: "Player creation of BTC price guessing game.",
+};
 
 function create() {
   const cookieStore = cookies();
