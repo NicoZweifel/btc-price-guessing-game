@@ -80,7 +80,7 @@ Make sure that you create your own stack with configuration like domain, subdoma
 > [!TIP]  
 > If you do not want to use Pulumi you can also use the Dockerfile or [Docker-compose](https://docs.docker.com/compose/). [Below](#Docker) is more information.
 
-### Create a Stack
+#### Create a Stack
 
 
 ```bash
@@ -89,7 +89,7 @@ pulumi stack init
 
 Check the [config section](https://www.pulumi.com/docs/concepts/config/) and add your configuration, as well as secrets. 
 
-### Preview & Deploy
+#### Preview & Deploy
 
 ```bash
 pulumi up
