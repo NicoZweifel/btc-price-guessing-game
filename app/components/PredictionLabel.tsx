@@ -14,8 +14,18 @@ function PredictionLabel({
   result?: EvaluatePredictionResult;
 } & ComponentProps<"div">) {
   const text = `Your guess currently resolves to: ${result?.value?.toString() ?? "unchanged."}`;
-  const date = new Date((prediction.timestamp + 120) * 1000);
-  date.setSeconds(0);
+
+  let end = new Date((prediction.timestamp + 120) * 1000);
+
+  // Price is considered unchanged. We will have to wait another minute.
+  if (result && result.value === undefined) {
+    end = new Date();
+    end.setMinutes(end.getMinutes() + 1);
+  }
+
+  // Remove seconds to get time when prediction can be solved.
+  end.setSeconds(0);
+
   return (
     <div
       {...props}
@@ -23,7 +33,7 @@ function PredictionLabel({
         "py-3 px-10 flex-col rounded-lg text-black font-semibold ring-1 items-center justify-center flex gap-2",
         prediction.direction == DIRECTION.UP
           ? "bg-green-700 ring-green-900"
-          : "bg-red-700 ring-green-900",
+          : "bg-red-700 ring-red-900",
         className,
       )}
     >
@@ -31,7 +41,7 @@ function PredictionLabel({
         {prediction.direction == DIRECTION.UP ? <ArrowUp /> : <ArrowDown />}
         {new Date(prediction.timestamp * 1000).toLocaleTimeString() +
           " - " +
-          date.toLocaleTimeString()}
+          end.toLocaleTimeString()}
       </div>
       <p className="font-bold">{text}</p>
     </div>

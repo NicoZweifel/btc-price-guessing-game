@@ -1,8 +1,8 @@
 "use client";
 
 import { evaluatePrediction } from "@/app/actions/prediction";
-import { Prediction } from "@/types";
-import { ComponentProps, useEffect, useRef, useState } from "react";
+import { EvaluatePredictionResult, Prediction } from "@/types";
+import { ComponentProps, RefObject, useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
 import PredictionLabel from "../PredictionLabel";
 import { useCountdown } from "@/hooks";
@@ -11,11 +11,12 @@ export type EvaluatePredictionFormProps = {
   prediction: Prediction;
 } & Omit<ComponentProps<"form">, "action" | "ref">;
 
-function EvaluatePredictionForm({
+function useEvaluatePredictionForm({
   prediction,
-  ...props
-}: EvaluatePredictionFormProps) {
-  const ref = useRef<HTMLFormElement>(null);
+  ref,
+}: Pick<EvaluatePredictionFormProps, "prediction"> & {
+  ref: RefObject<HTMLFormElement>;
+}): [EvaluatePredictionResult | undefined, () => void] {
   const [state, formAction] = useFormState(evaluatePrediction, undefined);
   const [seconds] = useCountdown();
 
@@ -25,7 +26,18 @@ function EvaluatePredictionForm({
     if (!ref.current || !predictionResolvable) return;
 
     ref.current.requestSubmit();
-  }, [prediction, seconds]);
+  }, [prediction, ref, seconds]);
+
+  return [state, formAction];
+}
+
+function EvaluatePredictionForm({
+  prediction,
+  ...props
+}: EvaluatePredictionFormProps) {
+  const ref = useRef<HTMLFormElement>(null);
+
+  const [state, formAction] = useEvaluatePredictionForm({ prediction, ref });
 
   return (
     <form {...props} ref={ref} action={formAction}>
