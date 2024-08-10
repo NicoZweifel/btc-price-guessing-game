@@ -3,12 +3,12 @@ import { DIRECTION, OHLCData } from "@/types";
 function compareOHLC(first: OHLCData, second: OHLCData): DIRECTION {
   const isUp = second.close > first.close;
   const isDown = second.close < first.close;
-  const isHigherThanHigh = second.close > first.high;
-  const isLowerThanLow = second.close < first.low;
+  const isHigherHigh = second.high > first.high;
+  const isLowerLow = second.low < first.low;
 
-  if (isUp && isHigherThanHigh && !isLowerThanLow) {
+  if (isUp && isHigherHigh && !isLowerLow) {
     return DIRECTION.UP;
-  } else if (isDown && isLowerThanLow && !isHigherThanHigh) {
+  } else if (isDown && isLowerLow && !isHigherHigh) {
     return DIRECTION.DOWN;
   }
 

@@ -11,12 +11,12 @@ describe("compareOHLC", () => {
     timestamp: 0,
   };
 
-  it("should return DIRECTION.UP when second close is higher and has higher close than the previous high", () => {
+  it("should return DIRECTION.UP when second close is higher and has higher high than the previous high", () => {
     const second: OHLCData = { ...first, close: 130, high: 140 };
     expect(compareOHLC(first, second)).toBe(DIRECTION.UP);
   });
 
-  it("should return DIRECTION.DOWN when second close is lower and has lower close than the previous low", () => {
+  it("should return DIRECTION.DOWN when second close is lower and has lower low than the previous low", () => {
     const second: OHLCData = { ...first, close: 70, low: 60 };
     expect(compareOHLC(first, second)).toBe(DIRECTION.DOWN);
   });
@@ -28,6 +28,16 @@ describe("compareOHLC", () => {
 
   it("should return DIRECTION.UNCHANGED when second close is lower but not lower than previous low", () => {
     const second: OHLCData = { ...first, close: 105 };
+    expect(compareOHLC(first, second)).toBe(DIRECTION.UNCHANGED);
+  });
+
+  it("should return DIRECTION.UNCHANGED when second close is higher, high is higher but low is lower than previous low", () => {
+    const second: OHLCData = { ...first, close: 130, high: 140, low: 70 };
+    expect(compareOHLC(first, second)).toBe(DIRECTION.UNCHANGED);
+  });
+
+  it("should return DIRECTION.UNCHANGED when second close is lower, low is lower but high is higher than previous high", () => {
+    const second: OHLCData = { ...first, close: 70, low: 60, high: 140 };
     expect(compareOHLC(first, second)).toBe(DIRECTION.UNCHANGED);
   });
 

@@ -101,7 +101,7 @@ describe("evaluatePrediction", () => {
     );
 
     expect(result).toStrictEqual({
-      resolved:false,
+      resolved: false,
       value: true,
     });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(1);
@@ -121,7 +121,7 @@ describe("evaluatePrediction", () => {
     );
 
     expect(result).toStrictEqual({
-      resolved:false,
+      resolved: false,
     });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(2);
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
@@ -162,7 +162,7 @@ describe("evaluatePrediction", () => {
     );
 
     expect(result).toStrictEqual({
-      resolved:false,
+      resolved: false,
       value: true,
     });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(1);
