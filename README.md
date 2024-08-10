@@ -40,8 +40,8 @@ This Approach was chosen for the following reasons:
 
 > [!NOTE]
 > A drawback of this method is that guesses made towards the end of the interval are statistically "easier" than guesses made at the beginning. 
-> This is because the player is betting on the result of the next interval, compared to the range of the current one which, including the high and low, hasn't concluded.
-> Players that take this into account and consider the current high and low will make more effective guesses.
+> This is because the player is betting on the result and range of the next interval, compared to the range of the current one.
+> Players that take this into account and consider the current high and low when submitting a guess will make more effective guesses.
 >
 > **This applies to all players, creating a fair environment and providing consistent provable results.**
 
