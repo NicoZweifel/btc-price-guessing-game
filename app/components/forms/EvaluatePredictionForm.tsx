@@ -35,6 +35,7 @@ function EvaluatePredictionForm({
 
   return (
     <form {...props} ref={ref} action={formAction}>
+       <p>{seconds}</p>
       <PredictionLabel result={state} prediction={prediction} />
     </form>
   );
