@@ -18,7 +18,6 @@ A BTC price guessing game.
 - [x] New players start with a score of 0
 - [x] The guesses should be resolved fairly using BTC price data from any available 3rd party API
 - [x] The score of each player should be persisted in a backend data store (AWS services preferred)
-- [x] Please provide us a link to your deployed solution.
 - [x] Optional: Players should be able to close their browser and return back to see their score and continue to make more guesses
 
 ## Solution
