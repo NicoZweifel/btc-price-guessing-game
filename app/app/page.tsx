@@ -34,7 +34,7 @@ export default async function Home() {
   const [prediction, highscore, leaderBoard, orders] = res;
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex grow w-full flex-row gap-4 justify-center">
+      <div className="flex grow w-full flex-col lg:flex-row gap-4 justify-center">
         <div className="flex grow flex-col gap-2 max-w-5xl items-center justify-between font-mono text-sm">
           <Chart className="flex flex-col grow" />
           <Price
