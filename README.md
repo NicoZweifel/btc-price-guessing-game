@@ -57,6 +57,8 @@ This Approach was chosen for the following reasons:
 - Volatility Adjustment.
 - Authentication and real accounts, as well as a relational Database.
 - Could be hosted on Lambda by using [OpenNEXT](https://open-next.js.org/)(pulumi or terraform) or ECS with ec2 Instances could be used instead of Fargate.
+- Workspaces could be used (complicates Docker setup).
+- Components/UI could be organized and tested (state unit tests, snapshots, storybook). 
 
 ### Development
 
