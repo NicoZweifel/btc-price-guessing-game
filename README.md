@@ -46,14 +46,14 @@ However, this is the same for every player, provides consistent provable results
 
 ## Technical Decisions
 
-- The [app](/app) uses [next.js](https://nextjs.org/) combined with [tailwind](https://tailwindui.com/), as it allowed for fast prototyping.
-- [TradingView](https://www.tradingview.com/widget/advanced-chart/) is used to display an interactive OHLC Chart that uses Data from the [Bitstamp api](https://www.bitstamp.net/api/).
+- The [app](/app) uses [`Next.js`](https://nextjs.org/) combined with [`Tailwind`](https://tailwindui.com/), as it allowed for fast prototyping.
+- [`TradingView`](https://www.tradingview.com/widget/advanced-chart/) is used to display an interactive OHLC Chart that uses Data from the [`Bitstamp` api](https://www.bitstamp.net/api/).
 - The live price displayed is using Live Market Order Data that is received over a websocket connection
-- Guesses are evaluated against OHLC Data. All Data is from [Bitstamp](https://www.bitstamp.net/api/).
-- [redis](https://redis.io/) was chosen to persist/share/sync data because it is great for real time data or data types like rankings, scores etc.
-- [Pulumi](https://www.pulumi.com/docs/) is used to deploy to AWS. This project is using Fargate as there is no need to automatically scale. 
-- [Cloudflare](https://www.cloudflare.com/) is used to manage the DNS record and SSL certificate.
-- [Jest](https://jestjs.io/) was chosen to run tests. 
+- Guesses are evaluated against OHLC Data. All Data is from [`Bitstamp`](https://www.bitstamp.net/api/).
+- [`redis`](https://redis.io/) was chosen to persist/share/sync data because it is great for real time data or data types like rankings, scores etc.
+- [`Pulumi`](https://www.pulumi.com/docs/) is used to deploy to AWS. This project is using Fargate as there is no need to automatically scale. 
+- [`Cloudflare`](https://www.cloudflare.com/) is used to manage the DNS record and SSL certificate.
+- [`Jest`](https://jestjs.io/) was chosen to run tests. 
 - A Service layer is used, so that Application Logic can be easily tested against different test cases.
 
 ### Potential improvements
@@ -64,7 +64,7 @@ However, this is the same for every player, provides consistent provable results
 - Weighted Averages to account for price distribution within the interval.
 - Volatility Adjustment.
 - Authentication and real accounts, as well as a relational Database.
-- Could be hosted on Lambda by using [OpenNEXT](https://open-next.js.org/)(pulumi or terraform) or ECS with ec2 Instances could be used instead of Fargate.
+- Could be hosted on Lambda by using [`OpenNEXT`](https://open-next.js.org/)(pulumi or terraform) or ECS with ec2 Instances could be used instead of Fargate.
 - Workspaces could be used (complicates Docker setup).
 - Components/UI could be organized and tested (state unit tests, snapshots, storybook). 
 
@@ -72,12 +72,20 @@ However, this is the same for every player, provides consistent provable results
 
 For Development instructions of the application please go [here](/app/README.md)
 
+#### Format
+
+Formatting can be done with [`prettier`].
+
+```bash
+pnpm format
+```
+
 ### Deployment
 
-The deployment script is using [Pulumi](https://www.pulumi.com/docs/) and creates all required cloud resources on AWS, as well as getting a Certificate and creating a DNS Entry on Cloudflare.
+The deployment script is using [`Pulumi`](https://www.pulumi.com/docs/) and creates all required cloud resources on AWS, as well as getting a Certificate and creating a DNS Entry on Cloudflare.
 
 > [!IMPORTANT]
-> [Pulumi](https://www.pulumi.com/docs/), [Cloudflare](https://www.cloudflare.com/) and [AWS](https://aws.amazon.com/) Accounts are required to Preview or Update Cloud Resources.
+> [`Pulumi`](https://www.pulumi.com/docs/), [`Cloudflare`](https://www.cloudflare.com/) and [`AWS`](https://aws.amazon.com/) Accounts are required to Preview or Update Cloud Resources.
 
 
 #### Install dependencies
@@ -88,7 +96,7 @@ pnpm i
 Make sure that you create your own stack with configuration like domain, subdomain and secrets that represent your cloudflare api token and zone ID respectively.
 
 > [!TIP]  
-> If you do not want to use Pulumi you can also use the Dockerfile or [Docker-compose](https://docs.docker.com/compose/). [Below](#Docker) is more information.
+> If you do not want to use Pulumi you can also use the Dockerfile or [`Docker-compose`](https://docs.docker.com/compose/). [Below](#Docker) is more information.
 
 #### Create a Stack
 
