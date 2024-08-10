@@ -14,7 +14,7 @@ A BTC price guessing game.
 - [x] After a guess is entered the player cannot make new guesses until the existing guess is resolved
 - [x] The guess is resolved when the price changes and at least 60 seconds have passed since the guess was made
 - [x] If the guess is correct (up = price went higher, down = price went lower), the user gets 1 point added to their score. If the guess is incorrect, the user loses 1 point.
-- [x]Players can only make one guess at a time
+- [x] Players can only make one guess at a time
 - [x] New players start with a score of 0
 - [x] The guesses should be resolved fairly using BTC price data from any available 3rd party API
 - [x] The score of each player should be persisted in a backend data store (AWS services preferred)
@@ -23,9 +23,12 @@ A BTC price guessing game.
 
 ## Solution
 
-Guesses are timestamps that get resolved against OHLC Data.
+Guesses are UTC timestamps that get created on the server and are resolved against OHLC Data.
 
-A guess is considered correct if the close of the following minute closed as predicted as well as the high and low. This was chosen for the following reasons:
+> [!IMPORTANT]
+> A guess is considered correct if the close of the following minute closed as predicted, while also having a higher high and lower low or a lower low and no higher high.
+
+This Approach was chosen for the following reasons:
 
 - Fairness: It provides a clear and objective method for determining whether the price has moved up or down within a specific interval.
 - Accuracy: Using OHLC data, especially high and low values, gives a reliable representation of the price range during that period.
@@ -36,10 +39,10 @@ A guess is considered correct if the close of the following minute closed as pre
 
 ## Technical Decisions
 
-- The [app](/app) uses [next.js](https://nextjs.org/) combined with [tailwind](https://tailwindui.com/) as a web framework, as it allowed me to prototype relatively fast.
+- The [app](/app) uses [next.js](https://nextjs.org/) combined with [tailwind](https://tailwindui.com/), as it allowed me to prototype relatively fast.
 - [TradingView](https://www.tradingview.com/widget/advanced-chart/) is used to display an interactive OHLC Chart that uses Data from the [Bitstamp api](https://www.bitstamp.net/api/).
-- The Live Price displayed is using Live Market Order Data and the Guesses are evaluated against OHLC Data. All Data is from [Bitstamp](https://www.bitstamp.net/api/).
-- [redis](https://redis.io/) is used to persist/share/sync data. It is great for real time data or data types like ranking scores etc.
+- The live price displayed is using Live Market Order Data and the Guesses are evaluated against OHLC Data. All Data is from [Bitstamp](https://www.bitstamp.net/api/).
+- [redis](https://redis.io/) was chosen to persist/share/sync data because it is great for real time data or data types like rankings, scores etc.
 - [Pulumi](https://www.pulumi.com/docs/) is used to deploy to AWS. This project is using Fargate as there is no need to automatically scale. 
 - [Cloudflare](https://www.cloudflare.com/) is used to manage the DNS record and SSL certificate.
 - [Jest](https://jestjs.io/) Was chosen to run tests. 
