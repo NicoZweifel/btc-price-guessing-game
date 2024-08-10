@@ -22,7 +22,7 @@ function CreatePredictionForm(props: Omit<ComponentProps<"form">, "action">) {
         placeholder="John"
         required
       />
-      <div className="flex flex-col grow-0 justify-end gap-2">
+      <div className="flex flex-col gap-2">
         <Button type="submit" className="mt-6 px-4 text-sm">
           Play
         </Button>
