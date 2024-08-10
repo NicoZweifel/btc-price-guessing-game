@@ -43,14 +43,12 @@ export default async function Home() {
           ) : (
             <CreatePredictionForm />
           )}
-          {highscore && (
-            <div className="pt-2">
-              <p className="text-neutral-200">Highscore</p>
-              <p className="text-2xl text-neutral-200 text-center">
-                {highscore}
-              </p>
-            </div>
-          )}
+          <div className="pt-2">
+            <p className="text-neutral-200">Highscore</p>
+            <p className="text-2xl text-neutral-200 text-center">
+              {highscore ?? 0}
+            </p>
+          </div>
         </div>
         <div>
           <p className="text-neutral-200">Leaderboard</p>
