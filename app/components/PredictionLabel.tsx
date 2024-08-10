@@ -18,13 +18,11 @@ function PredictionLabel({
 } & ComponentProps<"div">) {
   const [seconds] = useCountdown();
 
-  const text = `Your guess currently resolves to: ${result?.value?.toString() ?? "unchanged."}`;
+  const text = `Your guess currently resolves to: ${result?.value ? result.value.toString() : "unchanged"}`;
 
   let end = new Date((prediction.timestamp + 120) * 1000);
-
   // Price is considered unchanged. We will have to wait another minute.
   if (result && result.value === undefined) {
-    end = new Date();
     end.setMinutes(end.getMinutes() + 1);
   }
 
@@ -42,14 +40,14 @@ function PredictionLabel({
         className,
       )}
     >
-      <div className="flex flex-row gap-2 font-semibold text-lg">
+      <div suppressHydrationWarning className="flex flex-row gap-2 font-semibold text-lg">
         {prediction.direction == DIRECTION.UP ? <ArrowUp /> : <ArrowDown />}
         {new Date(prediction.timestamp * 1000).toLocaleTimeString() +
           " - " +
           end.toLocaleTimeString()}
       </div>
       {result && (
-        <p className="font-bold">
+        <p suppressHydrationWarning className="font-bold">
           {text}. {seconds} seconds remaining.
         </p>
       )}

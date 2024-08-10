@@ -19,7 +19,7 @@ function CreatePredictionForm({
       action={createPrediction}
     >
       <p className={"text-lg text-center"}>Up or down?</p>
-      <p className={"font-bold text-center"}>
+      <p suppressHydrationWarning className={"font-bold text-center"}>
         {seconds}s remaining to submit a guess.
       </p>
       <div className="flex flex-row justify-center gap-2">

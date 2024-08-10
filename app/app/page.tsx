@@ -9,12 +9,6 @@ import {
 import { highscoreService, predictionService } from "@/services";
 import { Prediction } from "@/types";
 import { getRedisClient } from "@/clients";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "BTC-game",
-  description: "A BTC price guessing game.",
-};
 
 export default async function Home() {
   const cookieStore = cookies();

@@ -30,7 +30,10 @@ export async function createPlayer(
       };
 
     await playerService.createPlayer(client, player);
-    cookies().set("player", player);
+    cookies().set("player", player, {
+      secure: true,
+      sameSite: true,
+    });
 
     revalidatePath("/");
   } finally {
