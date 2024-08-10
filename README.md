@@ -75,7 +75,7 @@ The deployment script is written with [Pulumi](https://www.pulumi.com/docs/) and
 pnpm i
 ```
 
-Make sure that you create your own stack with configuration like domain, subdomain and secrets that represent your cloudflare api token and zone ID respectively if you intend to use this script.
+Make sure that you create your own stack with configuration like domain, subdomain and secrets that represent your cloudflare api token and zone ID respectively.
 
 > [!TIP]  
 > If you do not want to use Pulumi you can also use the Dockerfile or [Docker-compose](https://docs.docker.com/compose/). [Below](#Docker) is more information.
