@@ -18,7 +18,7 @@ export default async function Home() {
     await homeService.getData(player.value);
 
   return (
-    <main className="flex flex-col grow items-center p-4">
+    <main className="flex flex-col grow items-center p-4 pb-8">
       <div className="flex font-mono text-sm grow w-full flex-col lg:flex-row gap-4 justify-center">
         <div className="flex grow flex-col gap-2 items-center">
           <Chart className="flex flex-col grow" />
