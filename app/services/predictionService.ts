@@ -74,8 +74,12 @@ async function evaluatePrediction(
     movement = comparer(first, second);
 
     if (!candleClosed || !predictionResolvable) {
+      const value =
+        movement === DIRECTION.UNCHANGED
+          ? undefined
+          : movement === prediction.direction;
       return {
-        value: movement === prediction.direction,
+        value,
         resolved: false,
       };
     }
@@ -83,7 +87,7 @@ async function evaluatePrediction(
     if (movement !== DIRECTION.UNCHANGED) break;
   }
 
-  if (movement == DIRECTION.UNCHANGED) {
+  if (movement === DIRECTION.UNCHANGED) {
     return { resolved: false };
   }
 

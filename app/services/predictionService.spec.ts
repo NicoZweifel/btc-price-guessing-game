@@ -90,7 +90,7 @@ describe("evaluatePrediction", () => {
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
   });
 
-  it("should return unclosed result if < 3 candles", async () => {
+  it("should return unresolved result if < 3 candles", async () => {
     mockOhclClient.get.mockResolvedValue([mockData[0], mockData[1]]);
     mockCompareOHLC.mockReturnValue(DIRECTION.UP);
 
@@ -108,7 +108,7 @@ describe("evaluatePrediction", () => {
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
   });
 
-  it("should return undefined unclosed result if last candle is UNCHANGED", async () => {
+  it("should return undefined unresolved result if last candle is UNCHANGED", async () => {
     mockOhclClient.get.mockResolvedValue(mockData);
 
     mockCompareOHLC.mockReturnValueOnce(DIRECTION.UNCHANGED);
@@ -149,7 +149,7 @@ describe("evaluatePrediction", () => {
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[2]);
   });
 
-  it("should return unclosed result if prediction is younger than 60 seconds", async () => {
+  it("should return unresolved UNCHANGED result if prediction is younger than 60 seconds", async () => {
     mockOhclClient.get.mockResolvedValue(mockData);
     prediction.timestamp = Math.trunc(Date.now() / 1000) - 30;
 
@@ -169,14 +169,10 @@ describe("evaluatePrediction", () => {
     expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
   });
 
-  it("should return unclosed result if last candle is younger than 60 seconds", async () => {
-    let timestamp = Math.trunc(Date.now() / 1000) - 30;
-    const mockDataWithOldCandle = [
-      mockData[0],
-      { ...mockData[1], timestamp }, // younger than 60 seconds
-    ];
+  it("should return unresolved result if prediction is younger than 60 seconds", async () => {
+    mockOhclClient.get.mockResolvedValue(mockData);
+    prediction.timestamp = Math.trunc(Date.now() / 1000) - 30;
 
-    mockOhclClient.get.mockResolvedValue(mockDataWithOldCandle);
     mockCompareOHLC.mockReturnValueOnce(DIRECTION.UP);
 
     const result = await predictionService.evaluatePrediction(
@@ -188,6 +184,30 @@ describe("evaluatePrediction", () => {
     expect(result).toStrictEqual({
       resolved: false,
       value: true,
+    });
+    expect(mockCompareOHLC).toHaveBeenCalledTimes(1);
+    expect(mockCompareOHLC).toHaveBeenCalledWith(mockData[0], mockData[1]);
+  });
+
+  it("should return unresolved undefined if result if last candle is UNCHANGED and younger than 60 seconds", async () => {
+    let timestamp = Math.trunc(Date.now() / 1000) - 30;
+    const mockDataWithOldCandle = [
+      mockData[0],
+      { ...mockData[1], timestamp }, // younger than 60 seconds
+    ];
+
+    mockOhclClient.get.mockResolvedValue(mockDataWithOldCandle);
+    mockCompareOHLC.mockReturnValueOnce(DIRECTION.UNCHANGED);
+
+    const result = await predictionService.evaluatePrediction(
+      prediction,
+      mockOhclClient,
+      mockCompareOHLC,
+    );
+
+    expect(result).toStrictEqual({
+      resolved: false,
+      value: undefined,
     });
     expect(mockCompareOHLC).toHaveBeenCalledTimes(1);
     expect(mockCompareOHLC).toHaveBeenCalledWith(...mockDataWithOldCandle);

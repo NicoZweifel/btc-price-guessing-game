@@ -19,9 +19,8 @@ function PredictionLabel({
   ...props
 }: PredictionLabelProps) {
   const [seconds] = useCountdown();
-
   const value =
-    result?.value != undefined ? result.value.toString() : `unchanged`;
+    result?.value !== undefined ? result.value.toString() : `unchanged`;
   const text = `Your guess currently resolves to: ${value}`;
 
   let end = new Date((prediction.timestamp + 120) * 1000);
