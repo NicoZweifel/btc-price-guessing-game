@@ -2,13 +2,24 @@
 
 import { createPlayer } from "@/app/actions/player";
 import Button from "@/components/Button";
+import { cn } from "@/utils";
 import { ComponentProps } from "react";
 import { useFormState } from "react-dom";
 
-function CreatePredictionForm(props: Omit<ComponentProps<"form">, "action">) {
+function CreatePredictionForm({
+  className,
+  ...props
+}: Omit<ComponentProps<"form">, "action">) {
   const [state, formAction] = useFormState(createPlayer, undefined);
   return (
-    <form {...props} action={formAction}>
+    <form
+      {...props}
+      className={cn(
+        "p-6 border rounded-lg shadow bg-gray-800 border-gray-700",
+        className,
+      )}
+      action={formAction}
+    >
       <label
         htmlFor="player"
         className="text-xl font-bold tracking-tight text-gray-900 dark:text-white"
@@ -23,7 +34,11 @@ function CreatePredictionForm(props: Omit<ComponentProps<"form">, "action">) {
         required
       />
       <div className="flex flex-col gap-2">
-        <Button type="submit" className="mt-6 px-4 text-sm">
+        <Button
+          aria-label="create player"
+          type="submit"
+          className="mt-6 px-4 text-sm"
+        >
           Play
         </Button>
         {state?.message && <p className="pt-2 text-red-600">{state.message}</p>}

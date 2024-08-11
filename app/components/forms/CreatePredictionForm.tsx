@@ -26,12 +26,14 @@ function CreatePredictionForm({
         <Button
           type="submit"
           name="direction"
+          aria-label="guess up"
           value={DIRECTION.UP}
           color="green"
         >
           <ArrowUp />
         </Button>
         <Button
+          aria-label="guess down"
           type="submit"
           name="direction"
           value={DIRECTION.DOWN}

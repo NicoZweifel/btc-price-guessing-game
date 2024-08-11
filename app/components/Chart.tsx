@@ -36,17 +36,14 @@ function Chart({ className, ...props }: Omit<ComponentProps<"div">, "ref">) {
       ref={container}
       {...props}
     >
-      <div
-        className="tradingview-widget-container__widget"
-        style={{ height: "calc(100% - 32px)", width: "100%" }}
-      ></div>
+      <div className="tradingview-widget-container__widget grow"></div>
       <div className="tradingview-widget-copyright">
         <a
           href="https://www.tradingview.com/"
           rel="noopener nofollow"
           target="_blank"
         >
-          <span className="text-neutral-200/40">
+          <span className="text-xs text-neutral-200/40">
             Track all markets on TradingView
           </span>
         </a>
