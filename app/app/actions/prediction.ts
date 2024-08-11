@@ -48,25 +48,28 @@ export async function evaluatePrediction(): Promise<
       player.value,
     );
 
-    if (prediction) {
-      const predicted = await predictionService.evaluatePrediction(
-        prediction,
-        ohlcClient,
-        compareOHLC,
-      );
-      if (predicted?.resolved) {
-        await highscoreService.updateHighscore(
-          client,
-          player.value,
-          predicted.value,
-        );
-        revalidatePath("/");
-      } else {
-        return predicted;
-      }
-    } else {
+    if (!prediction) {
       revalidatePath("/");
+      return;
     }
+
+    const predicted = await predictionService.evaluatePrediction(
+      prediction,
+      ohlcClient,
+      compareOHLC,
+    );
+
+    if (!predicted?.resolved) {
+      return predicted;
+    }
+
+    await highscoreService.updateHighscore(
+      client,
+      player.value,
+      predicted.value,
+    );
+
+    revalidatePath("/");
   } finally {
     await client.disconnect();
   }
