@@ -15,7 +15,6 @@ export interface HomeService {
 
 async function getData(player: string): Promise<HomeServiceResult> {
   const client = await getRedisClient();
-
   let res: [Prediction | undefined, number | null, string[], OrderData[]];
 
   try {
@@ -30,7 +29,6 @@ async function getData(player: string): Promise<HomeServiceResult> {
   }
 
   const [prediction, highscore, leaderboard, orders] = res;
-
   return { prediction, highscore, leaderboard, orders };
 }
 
