@@ -54,7 +54,7 @@ export async function evaluatePrediction(): Promise<
         ohlcClient,
         compareOHLC,
       );
-      if (predicted != undefined && predicted.resolved) {
+      if (predicted?.resolved) {
         await highscoreService.updateHighscore(
           client,
           player.value,
