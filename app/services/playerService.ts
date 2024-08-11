@@ -10,17 +10,14 @@ export async function createPlayer(
   player: string,
 ): Promise<string> {
   await client.SADD("players", player);
-
   return player;
 }
 
-export async function playerExists(
+export function playerExists(
   client: ClientType,
   player: string,
 ): Promise<boolean> {
-  const exists = await client.SISMEMBER("players", player);
-
-  return exists;
+  return client.SISMEMBER("players", player);
 }
 
 const playerService: PlayerService = { playerExists, createPlayer };
