@@ -6,9 +6,7 @@ import {
   EvaluatePredictionForm,
   Price,
 } from "@/components";
-import { highscoreService, predictionService } from "@/services";
-import { OrderData, Prediction } from "@/types";
-import { getRedisClient, orderClient } from "@/clients";
+import { homeService } from "@/services";
 
 export default async function Home() {
   const cookieStore = cookies();
@@ -16,22 +14,9 @@ export default async function Home() {
 
   if (!player) redirect("/player/create");
 
-  const client = await getRedisClient();
+  const { prediction, highscore, leaderboard, orders } =
+    await homeService.getData(player.value);
 
-  let res: [Prediction | undefined, number | null, string[], OrderData[]];
-
-  try {
-    res = await Promise.all([
-      predictionService.getPrediction(client, player.value),
-      highscoreService.getHighscore(client, player.value),
-      highscoreService.getRange(client, 0, 50),
-      orderClient.get(),
-    ]);
-  } finally {
-    await client.disconnect();
-  }
-
-  const [prediction, highscore, leaderBoard, orders] = res;
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex grow w-full flex-col lg:flex-row gap-4 justify-center">
@@ -56,7 +41,7 @@ export default async function Home() {
         </div>
         <div>
           <p className="text-lg font-semibold">Leaderboard</p>
-          {leaderBoard.reverse().map((x) => (
+          {leaderboard.reverse().map((x) => (
             <p key={x}>{x}</p>
           ))}
         </div>

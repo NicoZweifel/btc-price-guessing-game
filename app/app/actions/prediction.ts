@@ -19,6 +19,7 @@ export async function createPrediction(formData: FormData) {
   if (!direction) return { message: "Direction is missing!" };
 
   const client = await getRedisClient();
+
   try {
     await predictionService.createPrediction(client, {
       player,
