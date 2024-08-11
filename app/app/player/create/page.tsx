@@ -15,7 +15,7 @@ function create() {
   if (player) redirect("/");
 
   return (
-    <main className="flex flex-col grow items-center p-4">
+    <main className="flex flex-col grow items-center p-4 pb-8">
       <div className="flex grow flex-col gap-2 items-center font-mono text-sm">
         <CreatePlayerForm />
       </div>
