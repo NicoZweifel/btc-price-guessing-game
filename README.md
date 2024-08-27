@@ -1,7 +1,5 @@
 # BTC-price-guessing-game
 
-[![www](https://img.shields.io/badge/docs-online-green)](https://btc-game.nicozweifel.com/)
-
 A BTC price guessing game.
 
 - [app](/app)
